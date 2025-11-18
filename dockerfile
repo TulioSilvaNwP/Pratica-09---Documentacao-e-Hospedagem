@@ -7,6 +7,7 @@ RUN apt-get update && \
 
 COPY . .
 
+WORKDIR /app/demo   # ⬅️ MUDE PARA A PASTA CERTA
 RUN mvn clean install
 
 FROM eclipse-temurin:21-jdk-jammy
@@ -15,6 +16,6 @@ WORKDIR /app
 
 EXPOSE 8080
 
-COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/demo/target/demo-0.0.1-SNAPSHOT.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
