@@ -67,11 +67,11 @@ http://localhost:8080/swagger-ui.html
 A aplicação foi hospedada no Render. Link para acesso:
 
 ```
-https://seu-projeto-render.onrender.com
+https://pratica-09-documentacao-e-hospedagem.onrender.com
 ```
 
 Documentação Swagger publicada:
 
 ```
-https://seu-projeto-render.onrender.com/swagger-ui.html
+https://pratica-09-documentacao-e-hospedagem.onrender.com/swagger-ui/index.html
 ```
