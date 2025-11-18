@@ -7,7 +7,7 @@ RUN apt-get update && \
 
 COPY . .
 
-WORKDIR /app/demo   # ⬅️ MUDE PARA A PASTA CERTA
+WORKDIR /app/demo
 RUN mvn clean install
 
 FROM eclipse-temurin:21-jdk-jammy
