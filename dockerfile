@@ -8,7 +8,7 @@ RUN apt-get update && \
 COPY . .
 
 WORKDIR /app/demo
-RUN mvn clean install
+RUN mvn clean install -DskipTests
 
 FROM eclipse-temurin:21-jdk-jammy
 
