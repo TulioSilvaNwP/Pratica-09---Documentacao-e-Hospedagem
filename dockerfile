@@ -1,22 +1,16 @@
-# Etapa de build: Maven + Java 21
-FROM maven:3.9.4-eclipse-temurin-21 AS build  
-# Versão “3.9.4‑eclipse‑temurin‑21” confirmada no Docker Hub :contentReference[oaicite:0]{index=0}  
+FROM ubuntu:latest AS build
 
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-21-jdk -y
+COPY . .
 
-COPY pom.xml .
-COPY src ./src
+RUN apt-get install maven -y
+RUN mvn clean install 
 
-RUN mvn clean package -DskipTests
+FROM openjdk:21-jdk-slim
 
-# Etapa final: runtime leve com Java 21
-FROM eclipse-temurin:21-jdk-jammy
+EXPOSE 8080
 
-WORKDIR /app
+COPY --from=build /target/deploy_render-1.0.0.jar app.jar
 
-COPY --from=build /app/target/*.jar app.jar
-
-# Define a porta dinâmica do Render
-ENV PORT 10000
-
-ENTRYPOINT ["java", "-Dserver.port=$PORT", "-jar", "app.jar"]
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
